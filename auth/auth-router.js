@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt')
 const express = require('express')
 const authModel = require('./auth-model')
+const jwt = require('jsonwebtoken')
+const secrets = require('../config/secrets')
 
 const router = require('express').Router();
 
@@ -29,12 +31,12 @@ router.post('/login', async (req, res, next) => {
       }, secrets.jwt, {
         expiresIn: '7d'
       })
-    }
 
-    res.status(200).json({
-      message: `Welcome ${user.username}`,
-      token: token,
-    })
+      res.status(200).json({
+        message: `Welcome ${user.username}`,
+        token: token,
+      })
+    }
   }
   catch (err) {
     next(err)

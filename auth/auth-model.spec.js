@@ -8,6 +8,11 @@ beforeEach(async () => {
 })
 
 describe('authModel', () => {
+    test('get users', async () => {
+        const res = await authModel.find()
+        expect(res.length).toBe(2)
+        expect(res[0].username).toBe('Don')
+    })
     test('add', async () => {
         const res = await authModel.add({ username: 'Carmen Sandiego', password: 'abc123' })
         expect(res.username).toBe('Carmen Sandiego')

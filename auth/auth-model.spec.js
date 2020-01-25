@@ -1,7 +1,7 @@
-const supertest = require('supertest')
+// const supertest = require('supertest')
 const db = require('../database/dbConfig')
 const authModel = require('./auth-model')
-const server = require('../api/server')
+// const server = require('../api/server')
 
 beforeEach(async () => {
     await db.seed.run()

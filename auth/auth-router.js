@@ -1,10 +1,21 @@
 const bcrypt = require('bcrypt')
-const express = require('express')
+// const express = require('express')
 const authModel = require('./auth-model')
 const jwt = require('jsonwebtoken')
 const secrets = require('../config/secrets')
+const restricted = require('./authenticate-middleware')
 
 const router = require('express').Router();
+
+router.get('/', restricted(), async (req, res, next) => {
+  try {
+    const users = await authModel.find()
+    return res.json(users)
+  }
+  catch (err) {
+    next(err)
+  }
+}) 
 
 router.post('/register', async (req, res, next) => {
   // implement registration

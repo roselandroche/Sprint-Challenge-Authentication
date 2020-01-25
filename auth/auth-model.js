@@ -1,6 +1,11 @@
 const bcrypt = require('bcrypt')
 const db = require('../database/dbConfig')
 
+//get users
+function find() {
+    return db('users').select('id', 'username')
+}
+
 //add
 async function add(user) {
     user.password = await bcrypt.hash(user.password, 13)
@@ -22,6 +27,7 @@ function findById(id) {
 
 
 module.exports = {
+    find,
     add,
     findBy,
     findById
